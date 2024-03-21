@@ -25,8 +25,6 @@ public class Test1_GoogleSearch {
 		WebElement textBox= driver.findElement(By.id("APjFqb"));
 		//search for google scholar and press enter:
 		textBox.sendKeys("google scholar",Keys.RETURN);
-	
-		
 	}
 	
 	@AfterTest

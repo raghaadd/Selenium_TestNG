@@ -94,58 +94,41 @@ public class ExeclUtils {
 	}
 	
 	
-    public void writeExcel(String[] dataToWrite) throws IOException{
- 
-	    //Read excel sheet by sheet name    
-	
-	    //Sheet sheet = guru99Workbook.getSheet(sheetName);
-	
-	    //Get the current count of rows in excel file
+    public void writeExcel() throws Exception{
+    	XSSFWorkbook workbook=new XSSFWorkbook();
+    	XSSFSheet sheet=workbook.createSheet("TestSheet");
     	
-        File file =    new File("C:\\Users\\Msys\\eclipse-workspace\\seleniumJavaFramework\\excel\\data.xlsx");
+    	String[][] valueToWrite = {{"email","password"},{"test@testqa2024"," "},{"test@testqa2024.com","12345rr"},{"test@testqa2024.com","wtx@91187"}};
+    	
+    	for(int i=0;i<valueToWrite.length;i++) {
+        	sheet.createRow(i);
+        	sheet.getRow(i).createCell(0).setCellValue(valueToWrite[i][0]);
+        	sheet.getRow(i).createCell(1).setCellValue(valueToWrite[i][1]);
+    	}
+    	File file=new File("C:\\Users\\Msys\\eclipse-workspace\\seleniumJavaFramework\\excel\\data.xlsx");
+    	FileOutputStream fos=new FileOutputStream(file);
+    	
+    	workbook.write(fos);
+    	workbook.close();
+    	
+//    	sheet.createRow(0);
+//    	sheet.getRow(0).createCell(0).setCellValue("email");
+//    	sheet.getRow(0).createCell(1).setCellValue("password");
+//    	
+//    	sheet.createRow(1);
+//    	sheet.getRow(1).createCell(0).setCellValue("test@testqa2024");
+//    	sheet.getRow(1).createCell(1).setCellValue(" ");
+//    	
+//    	sheet.createRow(2);
+//    	sheet.getRow(2).createCell(0).setCellValue("test@testqa2024.com");
+//    	sheet.getRow(2).createCell(1).setCellValue("12345r");
+//    	
+//    	sheet.createRow(3);
+//    	sheet.getRow(3).createCell(0).setCellValue("test@testqa2024.com");
+//    	sheet.getRow(3).createCell(1).setCellValue("wtx@91187");
+    	
 
-        //Create an object of FileInputStream class to read excel file
-
-        FileInputStream inputStream = new FileInputStream(file);
-	    int rowCount=0;
-	
-
-	
-	    //Get the first row from the sheet
-	
-	    Row row = sheet.getRow(0);
-	
-	    //Create a new row and append it at last of sheet
-	
-	    Row newRow = sheet.createRow(rowCount+1);
-	
-	    //Create a loop over the cell of newly created Row
-	
-	    for(int j = 0; j < row.getLastCellNum(); j++){
-	
-	        //Fill data in row
-	
-	        Cell cell = newRow.createCell(j);
-	
-	        cell.setCellValue(dataToWrite[j]);
-	
-	    }
-	    
-	    //Create an object of FileOutputStream class to create write data in excel file
-
-	    FileOutputStream outputStream = new FileOutputStream(file);
-
-	    //write data in the excel file
-
-	    workbook.write(outputStream);
-
-	    //close output stream
-
-	    outputStream.close();
-	    
-		rowCount=sheet.getPhysicalNumberOfRows();
-		System.out.println("No. of rows After: "+rowCount);
-
+    	
 	
     }
 

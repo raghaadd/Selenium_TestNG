@@ -11,3 +11,8 @@
 [ERROR] 2024-03-19 11:14:02.569 [main] Log4jDemo - This is an error message
 [WARN ] 2024-03-19 11:14:02.569 [main] Log4jDemo - This a warning message
 [FATAL] 2024-03-19 11:14:02.569 [main] Log4jDemo - This is a fetal message
+[TRACE] 2024-03-20 15:52:10.595 [main] Log4jDemo - This is a trace message
+[INFO ] 2024-03-20 15:52:10.609 [main] Log4jDemo - This is an information message
+[ERROR] 2024-03-20 15:52:10.610 [main] Log4jDemo - This is an error message
+[WARN ] 2024-03-20 15:52:10.611 [main] Log4jDemo - This a warning message
+[FATAL] 2024-03-20 15:52:10.611 [main] Log4jDemo - This is a fetal message

@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Ignore;
@@ -26,18 +27,13 @@ public class ExeclDataProvider {
 		driver.get("https://frontgate.com/UserLogonView?storeId=10053&catalogId=10053&langId=-1");
 		driver.findElement(By.id("logonId")).sendKeys(username);
 		driver.findElement(By.id("logonPassword")).sendKeys(password);
-		driver.findElement(By.id("logonPassword")).sendKeys(Keys.ENTER);
-		Thread.sleep(3000);
-		driver.close();
-		driver.quit();
-		
-		
+		driver.findElement(By.id("logonPassword")).sendKeys(Keys.ENTER);		
 	}
 
 	@DataProvider(name="test1data")
-	public Object[][] getData() throws IOException {
+	public Object[][] getData() throws Exception {
 		String excelPath="C:\\Users\\Msys\\eclipse-workspace\\seleniumJavaFramework\\excel\\data.xlsx";
-		String sheetName="sheet1";
+		String sheetName="TestSheet";
 		
 		Object data[][]=testData(excelPath,sheetName);
 		return data;
@@ -45,12 +41,11 @@ public class ExeclDataProvider {
 		
 	}
 	
-	public Object[][] testData(String excelPath, String sheetName) throws IOException {
+	public Object[][] testData(String excelPath, String sheetName) throws Exception {
 		ExeclUtils excel=new ExeclUtils(excelPath,sheetName);
 		int rowCount=excel.getRowCount();
 		int colCount=excel.getColCount();
-		String[] valueToWrite = {"test@testqa2024","12r"};
-		//excel.writeExcel(valueToWrite);
+		excel.writeExcel();
 		
 		Object data[][]=new Object[rowCount-1][colCount];
 		for(int i=1;i<rowCount;i++) {
@@ -63,6 +58,15 @@ public class ExeclDataProvider {
 			System.out.println();
 		}
 		return data;
+		
+	}
+	
+	@AfterTest
+	public void tearDown() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.close();
+		driver.quit();
+		System.out.println("Test Completed Successfully");
 		
 	}
 

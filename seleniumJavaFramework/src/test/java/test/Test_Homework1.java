@@ -30,7 +30,11 @@ public class Test_Homework1 {
 		//navigate to the sign in page
 		driver.findElement(By.id("loginMyAccount")).click();
 		
-		//
+	    // Find the logo element
+	    WebElement logoElement = driver.findElement(By.xpath("//*[@id=\"logo1\"]/a/img"));
+	    // Verify if the logo is displayed
+	    Assert.assertTrue(logoElement.isDisplayed(), "Logo is not displayed");
+		
         // Define the expected text
         String expectedText = "Welcome back! To access your account, please enter your email address and password and click Sign In.";
 		WebElement actualTextElement= driver.findElement(By.xpath("//*[@id=\"BDLoginMessageNormal\"]/p[1]"));
